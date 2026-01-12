@@ -3,11 +3,11 @@
 	"displayName": "cscope-code",
 	"description": "Cscope Extension for Code",
 	"icon": "resources/cscope.png",
-	"version": "0.0.8",
-	"publisher": "SeungukShin",
+	"version": "0.0.9",
+	"publisher": "dhananjaylatkar",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/SeungukShin/cscope-code"
+		"url": "https://github.com/dhananjaylatkar/cscope-code"
 	},
 	"engines": {
 		"vscode": "^1.74.0"
