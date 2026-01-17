@@ -153,7 +153,7 @@ export class CscopeCode implements vscode.Disposable {
 		if (!e || e.affectsConfiguration('cscope-code.definition')) {
 			if (this.config.get('definition')) {
 				if (!this.definition) {
-					this.definition = vscode.languages.registerDefinitionProvider('c', new DefRefProvider(this.log, this.env, this.statusbar, this.cscope));
+					this.definition = vscode.languages.registerDefinitionProvider(this.getDocSelector(), new DefRefProvider(this.log, this.env, this.statusbar, this.cscope));
 				}
 			} else {
 				this.definition?.dispose();
@@ -165,13 +165,24 @@ export class CscopeCode implements vscode.Disposable {
 		if (!e || e.affectsConfiguration('cscope-code.reference')) {
 			if (this.config.get('reference')) {
 				if (!this.reference) {
-					this.reference = vscode.languages.registerReferenceProvider('c', new DefRefProvider(this.log, this.env, this.statusbar, this.cscope));
+					this.reference = vscode.languages.registerReferenceProvider(this.getDocSelector(), new DefRefProvider(this.log, this.env, this.statusbar, this.cscope));
 				}
 			} else {
 				this.reference?.dispose();
 				this.reference = undefined;
 			}
 		}
+	}
+
+	private getDocSelector(): vscode.DocumentSelector {
+		const extentions: string = this.config.get('extensions');
+		const sel = extentions.split(",")
+			.map((item) => item.trim())
+			.map((ext) => ({
+				scheme: "file",
+				language: ext,
+			}));
+		return sel;
 	}
 
 	/**
