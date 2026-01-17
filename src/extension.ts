@@ -254,7 +254,7 @@ export class CscopeCode implements vscode.Disposable {
 	 * @returns {Promise<boolean>}
 	 */
 	async __showList(items: IItem[], word: string, cwd: string): Promise<boolean> {
-		const selectList: IFileSelectList = new FileSelectList(this.env, this.res, items, word, cwd, true);
+		const selectList: IFileSelectList = new FileSelectList(this.env, this.res, items, word, cwd, this.config.get('preview'));
 		let selected = false;
 		try {
 			selected = await selectList.show();
