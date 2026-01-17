@@ -27,7 +27,6 @@ class FileSelectListItem implements vscode.QuickPickItem {
 	private file: string;
 	private line: number;
 	public label: string;
-	public detail: string;
 	public iconPath: vscode.Uri | { light: vscode.Uri, dark: vscode.Uri } | vscode.ThemeIcon | undefined;
 
 	/**
@@ -38,16 +37,19 @@ class FileSelectListItem implements vscode.QuickPickItem {
 	 * @param {string} label
 	 * @param {string} detail
 	 */
-	constructor(res: IResource, file: string, line: number, label: string, detail: string) {
+	constructor(res: IResource, file: string, line: number, scope: string, detail: string) {
 		this.file = file;
 		this.line = line;
-		this.label = `${label}: ${detail}`;
+		if (scope == '<global>')
+			scope = `<${scope}>`;
+		else
+			scope = `<<${scope}>>`;
+		this.label = `${file}:${line}:${scope} ${detail}`;
 		const ext = path.extname(file).toLowerCase();
 		this.iconPath = res.get(IconMap[ext]);
 		if (!this.iconPath) {
 			this.iconPath = vscode.ThemeIcon.File;
 		}
-		this.detail = `${file}: ${line}`;
 	}
 
 	/**
