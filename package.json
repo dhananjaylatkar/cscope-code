@@ -3,7 +3,7 @@
 	"displayName": "cscope-code",
 	"description": "Cscope Extension for Code",
 	"icon": "resources/cscope.png",
-	"version": "0.0.9",
+	"version": "0.0.10",
 	"publisher": "dhananjaylatkar",
 	"repository": {
 		"type": "git",
